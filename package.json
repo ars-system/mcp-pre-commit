@@ -5,7 +5,7 @@
   "main": "dist/index.js",
   "type": "module",
   "bin": {
-    "mcp-pre-commit": "./dist/index.js"
+    "mcp-pre-commit": "dist/index.js"
   },
   "scripts": {
     "build": "tsc",
