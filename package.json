@@ -1,9 +1,12 @@
 {
-  "name": "mcp-pre-commit-server",
+  "name": "mcp-pre-commit",
   "version": "1.0.0",
   "description": "MCP tool server for managing git repositories and pre-commit hooks",
   "main": "dist/index.js",
   "type": "module",
+  "bin": {
+    "mcp-pre-commit": "./dist/index.js"
+  },
   "scripts": {
     "build": "tsc",
     "start": "node dist/index.js",
@@ -15,10 +18,32 @@
     "mcp",
     "git",
     "pre-commit",
-    "hooks"
+    "hooks",
+    "model-context-protocol",
+    "developer-tools",
+    "automation",
+    "code-quality",
+    "linting",
+    "formatting"
   ],
-  "author": "",
+  "author": "ARS System",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ars-system/mcp-pre-commit.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ars-system/mcp-pre-commit/issues"
+  },
+  "homepage": "https://github.com/ars-system/mcp-pre-commit#readme",
+  "files": [
+    "dist/**/*",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.27.1"
   },

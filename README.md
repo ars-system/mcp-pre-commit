@@ -22,6 +22,14 @@ This MCP server provides tools to:
 
 ## Installation
 
+### Via npm (Recommended)
+
+```bash
+npm install -g mcp-pre-commit
+```
+
+### From Source
+
 1. Clone or download this repository
 2. Install dependencies:
 
@@ -53,20 +61,50 @@ npm run watch
 
 ### Configuring with MCP Clients
 
-Add this server to your MCP client configuration. For example, in Claude Desktop's config file:
+Add this server to your MCP client configuration.
 
-**macOS**: `~/Library/Application Support/Claude/claude_desktop_config.json`
+#### For Global npm Installation:
+
+**macOS/Linux**: `~/Library/Application Support/Claude/claude_desktop_config.json`
+
+```json
+{
+  "mcpServers": {
+    "pre-commit-manager": {
+      "command": "mcp-pre-commit"
+    }
+  }
+}
+```
+
+**Windows**: `%APPDATA%/Claude/claude_desktop_config.json`
+
+```json
+{
+  "mcpServers": {
+    "pre-commit-manager": {
+      "command": "mcp-pre-commit"
+    }
+  }
+}
+```
+
+#### For Source Installation:
 
 ```json
 {
   "mcpServers": {
     "pre-commit-manager": {
       "command": "node",
-      "args": ["/path/to/mcp-pre-commit/dist/index.js"]
+      "args": ["/absolute/path/to/mcp-pre-commit/dist/index.js"]
     }
   }
 }
 ```
+
+#### For Other MCP Clients:
+
+Refer to your MCP client's documentation for configuration instructions. The command is `mcp-pre-commit` (for npm installation) or `node /path/to/dist/index.js` (for source installation).
 
 ## Available Tools
 
@@ -184,7 +222,20 @@ The server provides clear error messages for common issues:
 - Invalid repository paths
 - Undetectable project types (use `force_project_type` parameter)
 
+## Badges
+
+[![npm version](https://badge.fury.io/js/mcp-pre-commit.svg)](https://www.npmjs.com/package/mcp-pre-commit)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Node.js Version](https://img.shields.io/badge/node-%3E%3D18.0.0-brightgreen)](https://nodejs.org/)
+
 ## Contributing
+
+Contributions are welcome! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for details on:
+
+- Reporting bugs
+- Suggesting enhancements
+- Submitting pull requests
+- Code style guidelines
 
 Feel free to extend this server with additional features:
 
@@ -193,6 +244,18 @@ Feel free to extend this server with additional features:
 - Additional git operations
 - Pre-commit hook testing
 
+## Changelog
+
+See [CHANGELOG.md](CHANGELOG.md) for a list of changes in each version.
+
+## Support
+
+If you encounter any issues or have questions:
+
+- Open an issue on [GitHub Issues](https://github.com/ars-system/mcp-pre-commit/issues)
+- Check existing issues for solutions
+- Review the [FAQ](#error-handling) section
+
 ## License
 
-MIT
+MIT - see [LICENSE](LICENSE) file for details

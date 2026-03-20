@@ -1,0 +1,46 @@
+# Source files (only distribute compiled code)
+src/
+*.ts
+!*.d.ts
+
+# Development files
+tsconfig.json
+.husky/
+test-mcp.js
+*.test.ts
+*.test.js
+
+# Linting and formatting
+eslint.config.js
+.prettierrc.json
+.prettierignore
+.eslintignore
+
+# Git
+.git/
+.gitignore
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+
+# Dependencies
+node_modules/
+
+# Build artifacts
+*.tsbuildinfo
+
+# CI/CD
+.github/
+.gitlab-ci.yml
+.travis.yml
