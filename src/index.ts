@@ -16,7 +16,7 @@ const execAsync = promisify(exec);
 
 // Debug logging helper
 const DEBUG = process.env.DEBUG === 'true';
-function debugLog(message: string, data?: any) {
+function debugLog(message: string, data?: unknown) {
   if (DEBUG) {
     console.error(`[DEBUG] ${message}`, data || '');
   }
@@ -222,8 +222,9 @@ async function initGitRepo(repoPath: string): Promise<string> {
   try {
     await execAsync('git init', { cwd: repoPath });
     return 'Git repository initialized successfully';
-  } catch (error: any) {
-    throw new Error(`Failed to initialize git repository: ${error.message}`);
+  } catch (error: unknown) {
+    const message = error instanceof Error ? error.message : String(error);
+    throw new Error(`Failed to initialize git repository: ${message}`);
   }
 }
 
@@ -255,8 +256,9 @@ async function setupHusky(
       );
     }
     messages.push('✅ Installed all dependencies');
-  } catch (error: any) {
-    throw new Error(`Failed to install dependencies: ${error.message}`);
+  } catch (error: unknown) {
+    const message = error instanceof Error ? error.message : String(error);
+    throw new Error(`Failed to install dependencies: ${message}`);
   }
 
   // Create ESLint configuration (flat config for ESLint v9+)
@@ -354,8 +356,9 @@ export default [
   try {
     await execAsync('npx husky init', { cwd: repoPath });
     messages.push('✅ Initialized Husky');
-  } catch (error: any) {
-    throw new Error(`Failed to initialize husky: ${error.message}`);
+  } catch (error: unknown) {
+    const message = error instanceof Error ? error.message : String(error);
+    throw new Error(`Failed to initialize husky: ${message}`);
   }
 
   // Create pre-commit hook (updated for Husky v9+ - no deprecated shebang)
@@ -480,9 +483,10 @@ async function setupPreCommitHooks(
       cwd: repoPath,
     });
     return `Pre-commit hooks configured for ${projectType} project.\n\nOutput:\n${stdout}\n${stderr}`;
-  } catch (error: any) {
+  } catch (error: unknown) {
+    const message = error instanceof Error ? error.message : String(error);
     throw new Error(
-      `Failed to install pre-commit hooks. Make sure pre-commit is installed (pip install pre-commit or brew install pre-commit).\nError: ${error.message}`
+      `Failed to install pre-commit hooks. Make sure pre-commit is installed (pip install pre-commit or brew install pre-commit).\nError: ${message}`
     );
   }
 }
@@ -677,15 +681,17 @@ server.setRequestHandler(CallToolRequestSchema, async request => {
     }
 
     throw new Error(`Unknown tool: ${name}`);
-  } catch (error: any) {
+  } catch (error: unknown) {
     debugLog(`Error occurred:`, error);
-    console.error(`[ERROR] ${error.message}`);
-    console.error(error.stack);
+    const message = error instanceof Error ? error.message : String(error);
+    const stack = error instanceof Error ? error.stack : '';
+    console.error(`[ERROR] ${message}`);
+    console.error(stack);
     return {
       content: [
         {
           type: 'text',
-          text: `Error: ${error.message}`,
+          text: `Error: ${message}`,
         },
       ],
       isError: true,
